@@ -1,6 +1,6 @@
-# LUMEN — Client‑Side EVTX Threat Workbench
+# LUMEN — Client‑Side EVTX Companion
 
-LUMEN (Log Understanding and Malware Event Navigator) is a browser-based Windows Event Log analyzer that stays entirely on your machine. Load EVTX files, run curated SIGMA detections, correlate activity into storylines, extract IOCs, and export findings—without sending logs anywhere.
+LUMEN is a browser-based Windows Event Log analyzer that stays entirely on your machine. Load EVTX files, run curated SIGMA detections, correlate activity into storylines, extract IOCs, and export findings—without sending logs anywhere. If you are interested in contributing, feel free to check out the [guidelines](https://github.com/Koifman/LUMEN/edit/main/CONTRIBUTING.md).
 
 ## What it does
 - **Guided investigations**: A collapsible side-rail keeps you on track from ingest → detections → correlation → export.
@@ -43,22 +43,10 @@ npm run build
 - **Correlation engine** (`src/lib/correlationEngine.ts`): links SIGMA-matched events (+ ±1 context) into chains using process/temporal relationships. Limited to 50K events for performance.
 - **EVTX parsing**: WASM-backed parsing (using evtx Rust library) with chunked processing for large files; supports both binary EVTX and XML exports.
 - **Persistence**: `localStorage`-based session save/restore (metadata index + compressed payload).
-- **Security**: All computation in-browser; optional VT enrichment and AI analysis via user-supplied API keys.
-
-## Configuration tips
-- **Rule filtering**: Use the platform selector’s category checkboxes to cut load time and reduce false positives.
-- **Performance guards**: Avoid reloading rules unless platform/categories change; correlation can be skipped when there are zero SIGMA matches.
-- **Privacy**: VT calls are off unless a key is provided; everything else stays local.
 
 ## Testing & samples
 - Built-in sample loader plus `samples/EVTX-ATTACK-SAMPLES` for quick demos.
-- (Suggested) Add a small regression EVTX + expected detections to `npm test` for parser/matcher sanity checks.
 
-## Roadmap (shortlist)
-- Rule authoring/validation in-app.
-- ATT&CK mapping overlays in detections and storyline.
-- Worker offload for matching/correlation on very large files.
-- Single-chain export (PDF/MD) for quick sharing.
 
 ## License
 MIT — see [LICENSE](LICENSE).
