@@ -1,0 +1,87 @@
+{
+  "wmi_event": {
+    "file": "wmi_event.json",
+    "ruleCount": 3,
+    "sizeBytes": 3561
+  },
+  "sysmon": {
+    "file": "sysmon.json",
+    "ruleCount": 6,
+    "sizeBytes": 5402
+  },
+  "registry": {
+    "file": "registry.json",
+    "ruleCount": 241,
+    "sizeBytes": 388104
+  },
+  "raw_access_thread": {
+    "file": "raw_access_thread.json",
+    "ruleCount": 1,
+    "sizeBytes": 2679
+  },
+  "process_tampering": {
+    "file": "process_tampering.json",
+    "ruleCount": 1,
+    "sizeBytes": 1442
+  },
+  "process_creation": {
+    "file": "process_creation.json",
+    "ruleCount": 1151,
+    "sizeBytes": 1819417
+  },
+  "process_access": {
+    "file": "process_access.json",
+    "ruleCount": 21,
+    "sizeBytes": 35214
+  },
+  "powershell": {
+    "file": "powershell.json",
+    "ruleCount": 207,
+    "sizeBytes": 308808
+  },
+  "pipe_created": {
+    "file": "pipe_created.json",
+    "ruleCount": 17,
+    "sizeBytes": 35048
+  },
+  "network_connection": {
+    "file": "network_connection.json",
+    "ruleCount": 50,
+    "sizeBytes": 116714
+  },
+  "image_load": {
+    "file": "image_load.json",
+    "ruleCount": 96,
+    "sizeBytes": 151810
+  },
+  "file": {
+    "file": "file.json",
+    "ruleCount": 184,
+    "sizeBytes": 269286
+  },
+  "driver_load": {
+    "file": "driver_load.json",
+    "ruleCount": 10,
+    "sizeBytes": 375507
+  },
+  "dns_query": {
+    "file": "dns_query.json",
+    "ruleCount": 20,
+    "sizeBytes": 38440
+  },
+  "create_stream_hash": {
+    "file": "create_stream_hash.json",
+    "ruleCount": 9,
+    "sizeBytes": 22728
+  },
+  "create_remote_thread": {
+    "file": "create_remote_thread.json",
+    "ruleCount": 11,
+    "sizeBytes": 19456
+  },
+  "builtin": {
+    "file": "builtin.json",
+    "ruleCount": 321,
+    "sizeBytes": 443563
+  }
+}
