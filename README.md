@@ -36,7 +36,7 @@ npm run build
    - Correlation: Analyzes events with SIGMA matches (+ context events); chain list + Storyline summary for fast triage.
    - IOC Extraction: categorized indicators, VT lookup buttons, export IOCs.
    - Dashboards/Timeline/Process views: aggregated and time-sequenced perspectives.
-   - AI Analysis: Optional AI-powered analysis using Anthropic Claude, OpenAI, or Google Gemini.
+   - AI Analysis: Optional AI-powered analysis using Anthropic Claude, OpenAI, Google Gemini, or Ollama.
 5) **Export or save**: Generate reports or save a session locally to resume later.
 
 ## Architecture (high level)
