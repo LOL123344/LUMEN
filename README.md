@@ -1,5 +1,7 @@
 # LUMEN — Client‑Side EVTX Companion
 
+![](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*baIkQcUohn7SJl9ULbBUcw.png)
+
 LUMEN is a browser-based Windows Event Log analyzer that stays entirely on your machine. Load EVTX files, run curated SIGMA detections, correlate activity into storylines, extract IOCs, and export findings—without sending logs anywhere. If you are interested in contributing, feel free to check out the [guidelines](https://github.com/Koifman/LUMEN/blob/main/CONTRIBUTING.md).
 
 ## What it does
