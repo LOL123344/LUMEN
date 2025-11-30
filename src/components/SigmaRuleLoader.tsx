@@ -153,17 +153,7 @@ export default function SigmaRuleLoader({ engine, onRulesLoaded }: SigmaRuleLoad
 
       <div className="loader-info">
         <p>
-          Load SIGMA rules in YAML format. You can select multiple files or an entire folder.
-        </p>
-        <p className="hint">
-          💡 Tip: Download Windows SIGMA rules from{' '}
-          <a
-            href="https://github.com/SigmaHQ/sigma/tree/master/rules/windows"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            SigmaHQ repository
-          </a>
+          Load custom SIGMA rules in YAML format. You can select multiple files or an entire folder.
         </p>
       </div>
     </div>

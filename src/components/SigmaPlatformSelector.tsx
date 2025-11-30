@@ -1,25 +1,34 @@
-import { useMemo, useState } from 'react';
-import { getAvailablePlatforms, SigmaPlatform } from '../lib/sigma/utils/autoLoadRules';
+import { useMemo, useState, useCallback, useEffect } from 'react';
+import { getAvailablePlatformsWithCounts, SigmaPlatform, PlatformInfo } from '../lib/sigma/utils/autoLoadRules';
+import SigmaRuleLoader from './SigmaRuleLoader';
 import './SigmaPlatformSelector.css';
 
 interface SigmaPlatformSelectorProps {
   onSelect: (platform: SigmaPlatform, categories: string[]) => void;
   onBack: () => void;
+  sigmaEngine?: any;
 }
 
 const PLATFORM_CATEGORIES: Record<SigmaPlatform, string[]> = {
-  windows: ['process_creation', 'image_load', 'network_connection', 'registry', 'file_event', 'pipe_created', 'powershell', 'process_access', 'dns_query', 'security', 'driver_load']
+  windows: ['process_creation', 'image_load', 'network_connection', 'registry', 'file_event', 'pipe_created', 'powershell', 'process_access', 'dns_query', 'security', 'driver_load'],
+  chainsaw: ['account_tampering', 'antivirus', 'applocker', 'credential_access', 'defense_evasion', 'indicator_removal', 'lateral_movement', 'log_tampering', 'login_attacks', 'microsoft_rasvpn_events', 'microsoft_rds_events', 'persistence', 'powershell', 'rdp_attacks', 'service_installation', 'service_tampering']
 };
 
-export default function SigmaPlatformSelector({ onSelect, onBack }: SigmaPlatformSelectorProps) {
+export default function SigmaPlatformSelector({ onSelect, onBack, sigmaEngine }: SigmaPlatformSelectorProps) {
   const [hoveredPlatform, setHoveredPlatform] = useState<string | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<SigmaPlatform | null>(null);
-  const platforms = getAvailablePlatforms();
+  const [showRuleLoader, setShowRuleLoader] = useState(false);
+  const [platforms, setPlatforms] = useState<PlatformInfo[]>([]);
   const categories = useMemo(() => {
     if (!selectedPlatform) return [];
     return PLATFORM_CATEGORIES[selectedPlatform] || [];
   }, [selectedPlatform]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  // Load platforms with dynamic rule counts
+  useEffect(() => {
+    getAvailablePlatformsWithCounts().then(setPlatforms);
+  }, []);
 
   const handlePlatformClick = (platformId: SigmaPlatform) => {
     setSelectedPlatform(platformId);
@@ -37,6 +46,11 @@ export default function SigmaPlatformSelector({ onSelect, onBack }: SigmaPlatfor
     onSelect(selectedPlatform, selectedCategories);
   };
 
+  // Handler for when custom rules are loaded
+  const handleCustomRulesLoaded = useCallback((_count: number) => {
+    setShowRuleLoader(false);
+  }, []);
+
   return (
     <div className="platform-selector">
       <div className="platform-header">
@@ -50,7 +64,35 @@ export default function SigmaPlatformSelector({ onSelect, onBack }: SigmaPlatfor
           </div>
           <p className="tagline">Windows Event Log (EVTX) Detection Rules</p>
         </div>
+        <button
+          onClick={() => setShowRuleLoader(!showRuleLoader)}
+          className="load-custom-rules-button"
+          style={{
+            marginTop: '1rem',
+            padding: '0.75rem 1.5rem',
+            background: showRuleLoader ? 'var(--accent-orange)' : 'var(--accent-blue)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '0.95rem',
+            fontWeight: '600',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          {showRuleLoader ? '✕ Close Rule Loader' : '📂 Load Custom SIGMA Rules'}
+        </button>
       </div>
+
+      {/* Custom Rule Loader */}
+      {showRuleLoader && sigmaEngine && (
+        <div style={{ marginBottom: '2rem' }}>
+          <SigmaRuleLoader
+            engine={sigmaEngine}
+            onRulesLoaded={handleCustomRulesLoaded}
+          />
+        </div>
+      )}
 
       <div className="platform-cards">
         {platforms.map((platform) => (
@@ -108,10 +150,6 @@ export default function SigmaPlatformSelector({ onSelect, onBack }: SigmaPlatfor
           </div>
         </div>
       )}
-
-      <div className="platform-note">
-        LUMEN supports Windows Event Logs (EVTX) only. Filter categories to speed up rule loading.
-      </div>
     </div>
   );
 }
