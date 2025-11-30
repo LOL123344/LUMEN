@@ -441,6 +441,7 @@ function TimelineAnalysisView({
               setHasProcessed(true);
             }}
             cachedMatches={sigmaMatches}
+            sourceFiles={data.sourceFiles}
           />
         </section>
       </div>

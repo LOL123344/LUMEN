@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
 import { ParsedData, LogEntry } from '../types';
+import FileFilter from './FileFilter';
+import FileBreakdownStats from './FileBreakdownStats';
+import { getFileColor } from '../lib/fileColors';
 import { EventDetailsModal } from './EventDetailsModal';
 import './Dashboard.css';
 
@@ -38,6 +41,8 @@ function getFieldValue(entry: LogEntry, field: string): string {
       return entry.method || '';
     case 'path':
       return entry.path || '';
+    case 'sourceFile':
+      return entry.sourceFile || '';
     default:
       return '';
   }
@@ -67,6 +72,7 @@ export default function RawLogsView({ data, filename, onBack }: RawLogsViewProps
   const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(null);
   const [filterValue, setFilterValue] = useState('');
   const [filterOperator, setFilterOperator] = useState<FilterOperator>('contains');
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   // Modal state for viewing raw event
   const [selectedEvent, setSelectedEvent] = useState<LogEntry | null>(null);
@@ -74,13 +80,21 @@ export default function RawLogsView({ data, filename, onBack }: RawLogsViewProps
 
   // Filtered entries
   const filteredEntries = useMemo(() => {
+    let entries = data.entries;
+
+    // Filter by selected file first
+    if (selectedFile) {
+      entries = entries.filter(entry => entry.sourceFile === selectedFile);
+    }
+
+    // Then apply column filters
     const activeFilters = filters.filter(f => f.value);
 
     if (activeFilters.length === 0) {
-      return data.entries;
+      return entries;
     }
 
-    return data.entries.filter(entry => {
+    return entries.filter(entry => {
       for (const filter of activeFilters) {
         if (!matchesFilter(entry, filter)) {
           return false;
@@ -88,7 +102,7 @@ export default function RawLogsView({ data, filename, onBack }: RawLogsViewProps
       }
       return true;
     });
-  }, [data.entries, filters]);
+  }, [data.entries, filters, selectedFile]);
 
   // Add a filter
   const addFilter = (field: string) => {
@@ -143,6 +157,19 @@ export default function RawLogsView({ data, filename, onBack }: RawLogsViewProps
       <div className="raw-logs-section">
         <div className="chart-card log-viewer">
           <h3>Raw Logs ({filteredEntries.length.toLocaleString()} entries)</h3>
+
+          {/* File Breakdown Stats */}
+          <FileBreakdownStats
+            entries={data.entries}
+            sourceFiles={data.sourceFiles}
+          />
+
+          {/* File Filter */}
+          <FileFilter
+            sourceFiles={data.sourceFiles}
+            selectedFile={selectedFile}
+            onFileSelect={setSelectedFile}
+          />
 
           {/* Active Filters Display */}
           {filters.length > 0 && (
@@ -256,7 +283,13 @@ export default function RawLogsView({ data, filename, onBack }: RawLogsViewProps
             {/* Log Entries */}
             <div className="log-entries">
               {filteredEntries.slice(0, 100).map((entry, idx) => (
-                <div key={idx} className={`log-entry ${data.format === 'evtx' ? 'evtx-entry' : ''}`}>
+                <div
+                  key={idx}
+                  className={`log-entry ${data.format === 'evtx' ? 'evtx-entry' : ''}`}
+                  style={entry.sourceFile && data.sourceFiles && data.sourceFiles.length > 1 ? {
+                    borderLeft: `3px solid ${getFileColor(entry.sourceFile)}`
+                  } : undefined}
+                >
                   <span className="log-time">{entry.timestamp.toLocaleString()}</span>
                   {data.format === 'evtx' ? (
                     <>
