@@ -12,7 +12,7 @@ export default function FileFilter({ sourceFiles, selectedFile, onFileSelect }: 
     return sourceFiles && sourceFiles.length > 1;
   }, [sourceFiles]);
 
-  if (!showFilter) {
+  if (!showFilter || !sourceFiles) {
     return null;
   }
 
