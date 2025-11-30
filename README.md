@@ -16,10 +16,15 @@ LUMEN is a browser-based Windows Event Log analyzer that stays entirely on your 
 
 ## Quickstart
 ```bash
-git clone https://github.com/Koifman/LUMEN.git
+git clone --recurse-submodules https://github.com/Koifman/LUMEN.git
 cd LUMEN
 npm install
 npm run dev  # app at http://localhost:5173
+```
+
+If you already cloned without submodules:
+```bash
+git submodule update --init --recursive
 ```
 
 Build for production:

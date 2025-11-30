@@ -1,6 +1,6 @@
 # Updating Detection Rules
 
-LUMEN uses detection rules from multiple sources, maintained as Git submodules with sparse checkout.
+LUMEN uses detection rules from multiple sources, maintained as Git submodules.
 
 ## Automatic Updates (Recommended)
 
@@ -70,37 +70,28 @@ git commit -m "Update Chainsaw detection rules"
 ### SIGMA Rules (Active)
 - **Submodule**: `src/sigma-master`
 - **Source**: https://github.com/SigmaHQ/sigma.git
-- **Sparse Checkout**: Only `rules/windows/*` directory
+- **Used Paths**: Only `rules/windows/*` is bundled during build
 - **Bundled Output**: `public/sigma-rules/*.json`
 - **Rule Count**: ~2,356 Windows detection rules
 
 ### Chainsaw Rules (Reference)
 - **Submodule**: `src/chainsaw-rules`
 - **Source**: https://github.com/WithSecureLabs/chainsaw.git
-- **Sparse Checkout**: Only `rules/evtx/*` directory
+- **Used Paths**: Only `rules/evtx/*` is bundled during build
 - **Format**: Chainsaw tau (not SIGMA)
 - **Rule Count**: 74 Windows-focused detection rules
 
-## Why Sparse Checkout?
+## How It Works
 
-The full SIGMA repository contains:
-- Linux rules
-- macOS rules
-- Cloud provider rules
-- Documentation
-- Images and metadata
-- Deprecated rules
+The full SIGMA and Chainsaw repositories are included as Git submodules. While these repos contain rules for multiple platforms (Linux, macOS, Cloud, etc.), **only the Windows-specific rules are bundled during the build process**:
 
-Since LUMEN focuses on Windows Event Log analysis, we only need the Windows rules. Sparse checkout keeps our repository lean while maintaining the ability to pull updates from upstream.
+- SIGMA: Only `rules/windows/*` is processed
+- Chainsaw: Only `rules/evtx/*` is processed
 
-## Manual Configuration
+The build scripts (`bundle-sigma-rules.js` and `bundle-chainsaw-rules.js`) extract only the relevant rule files and bundle them into JSON files in the `public/` directory. This means:
 
-If you need to reconfigure the sparse checkout:
+- **Development**: Full submodules are cloned (larger initial clone)
+- **Production**: Only the bundled Windows rules are included in the final app
+- **End Users**: Never download the submodules - they only get the bundled rules
 
-```bash
-cd src/sigma-master
-git config core.sparseCheckout true
-echo "rules/windows/*" > ../../.git/modules/sigma-windows/info/sparse-checkout
-git read-tree -mu HEAD
-cd ../..
-```
+This approach keeps the production bundle lean while maintaining easy updates from upstream rule repositories.
