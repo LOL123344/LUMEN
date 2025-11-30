@@ -142,3 +142,6 @@ vite.config.ts.timestamp-*
 
 # nul
 nul
+
+# Sigma rules manifest
+public/sigma-rules/manifest.json
