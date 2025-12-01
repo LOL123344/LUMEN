@@ -17,8 +17,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingStatus, setProcessingStatus] = useState('');
-  const [eventsProcessed, setEventsProcessed] = useState(0);
-  const [totalEvents, setTotalEvents] = useState(0);
   const [chunksProcessed, setChunksProcessed] = useState(0);
   const [totalChunks, setTotalChunks] = useState(0);
   const [showSampleSelector, setShowSampleSelector] = useState(false);
@@ -28,8 +26,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
   const handleFile = useCallback(
     async (file: File) => {
       setIsProcessing(true);
-      setEventsProcessed(0);
-      setTotalEvents(0);
       setChunksProcessed(0);
       setTotalChunks(0);
       setProcessingStatus('Checking file format...');
@@ -60,8 +56,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
           const entries = await parseBinaryEVTXToEntries(
             file,
             (processed, total) => {
-              setEventsProcessed(processed);
-              setTotalEvents(total || 0);
               const totalDisplay = total ? total.toLocaleString() : 'unknown';
               const percentage = total > 0 ? ` (${Math.round((processed / total) * 100)}%)` : '';
               setProcessingStatus(`${processed.toLocaleString()} / ${totalDisplay} records${percentage}`);
@@ -130,8 +124,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
           // Parse the XML content with progress tracking
           setProcessingStatus('Parsing events from XML...');
           const parsedData = parseLogFile(xmlContent, (processed, total) => {
-            setEventsProcessed(processed);
-            setTotalEvents(total);
             setProcessingStatus(`Parsing events: ${processed.toLocaleString()} / ${total.toLocaleString()}`);
           }, file.name);
 
@@ -165,8 +157,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
       setIsProcessing(true);
       setTotalFiles(files.length);
       setCurrentFileIndex(0);
-      setEventsProcessed(0);
-      setTotalEvents(0);
       setChunksProcessed(0);
       setTotalChunks(0);
 
@@ -203,8 +193,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
             const entries = await parseBinaryEVTXToEntries(
               file,
               (processed, total) => {
-                setEventsProcessed(processed);
-                setTotalEvents(total || 0);
                 const totalDisplay = total ? total.toLocaleString() : 'unknown';
                 const percentage = total > 0 ? ` (${Math.round((processed / total) * 100)}%)` : '';
                 setProcessingStatus(`[${i + 1}/${files.length}] ${file.name}: ${processed.toLocaleString()} / ${totalDisplay} records${percentage}`);
@@ -262,8 +250,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
             // Parse XML
             setProcessingStatus(`[${i + 1}/${files.length}] Parsing events from ${file.name}...`);
             const parsedData = parseLogFile(xmlContent, (processed, total) => {
-              setEventsProcessed(processed);
-              setTotalEvents(total);
               setProcessingStatus(`[${i + 1}/${files.length}] ${file.name}: ${processed.toLocaleString()} / ${total.toLocaleString()} events`);
             }, file.name);
 
@@ -272,8 +258,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
           }
 
           // Reset progress for next file
-          setEventsProcessed(0);
-          setTotalEvents(0);
           setChunksProcessed(0);
           setTotalChunks(0);
         }
@@ -310,8 +294,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
     async (url: string, filename: string) => {
       setShowSampleSelector(false);
       setIsProcessing(true);
-      setEventsProcessed(0);
-      setTotalEvents(0);
       setChunksProcessed(0);
       setTotalChunks(0);
       setProcessingStatus('Fetching sample file...');
@@ -332,8 +314,6 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
         const entries = await parseBinaryEVTXToEntries(
           file,
           (processed, total) => {
-            setEventsProcessed(processed);
-            setTotalEvents(total || 0);
             const totalDisplay = total ? total.toLocaleString() : 'unknown';
             const percentage = total > 0 ? ` (${Math.round((processed / total) * 100)}%)` : '';
             setProcessingStatus(`${processed.toLocaleString()} / ${totalDisplay} records${percentage}`);
