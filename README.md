@@ -30,11 +30,6 @@ If you already cloned without submodules:
 git submodule update --init --recursive
 ```
 
-Build for production:
-```bash
-npm run build
-```
-
 ## Workflow
 1) **Upload logs**: Drag/drop single or multiple EVTX files, or load samples. File size limit: 1GB per file. Supports both binary EVTX and XML exports. Multi-file uploads are automatically merged for cross-file analysis with color-coded visualization and file filtering.
 2) **Select analysis**: SIGMA Detection, Event Correlation, Dashboards, Timeline, IOC Extraction, Raw Logs, AI Analysis.
@@ -50,7 +45,7 @@ npm run build
 ## Architecture (high level)
 - **React + Vite** frontend; heavy views lazy-loaded to trim initial bundle.
 - **SIGMA engine** (`src/lib/sigma/`): parser, compiler, matcher with platform/category-scoped loading from `src/sigma-master`; supports custom rule uploads.
-- **Correlation engine** (`src/lib/correlationEngine.ts`): links SIGMA-matched events (+ ±1 context) into chains using process/temporal relationships. Limited to 50K events for performance.
+- **Correlation engine** (`src/lib/correlationEngine.ts`): links SIGMA-matched events into chains using process/temporal relationships.
 - **EVTX parsing**: WASM-backed parsing (using evtx Rust library) with chunked processing for large files; supports both binary EVTX and XML exports; multi-file upload with merged analysis.
 - **Multi-file support**: File source tracking, color-coded visualization, file filtering, and breakdown statistics for analyzing multiple log files simultaneously.
 - **Persistence**: `localStorage`-based session save/restore (metadata index + compressed payload); supports multi-file sessions.
