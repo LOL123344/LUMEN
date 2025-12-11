@@ -240,6 +240,9 @@ export default function SigmaDetections({ events, sigmaEngine, onMatchesUpdate, 
     }).filter(([, ruleMatches]) => ruleMatches.length > 0);
   }, [sortedMatches, selectedFile]);
 
+  // Tooltip positioning is now handled by CSS (position: absolute)
+  // No JavaScript positioning needed - tooltip stays relative to its wrapper element
+
   // Window scroll handler for infinite scroll
   // Using window scroll since parent containers control scrolling
   // Track last scroll position to only trigger on actual scroll down
