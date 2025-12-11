@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MultiFileProcessingResults, FileProcessingResult, ErrorType } from '../types/fileProcessing';
+import { MultiFileProcessingResults, ErrorType } from '../types/fileProcessing';
 import { ParsedData } from '../types';
 import './FileProcessingResultsModal.css';
 

@@ -154,7 +154,7 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
   );
 
   // Helper function to categorize WASM parser errors
-  const categorizeWasmError = (error: unknown, filename: string): FileProcessingError => {
+  const categorizeWasmError = (error: unknown, _filename: string): FileProcessingError => {
     const errorMsg = error instanceof Error ? error.message : String(error);
 
     // No records parsed
@@ -207,7 +207,7 @@ export default function FileDropZone({ onFileLoaded, rulesLoading, onOpenSession
   };
 
   // Helper function to categorize XML parser errors
-  const categorizeXmlError = (error: unknown, filename: string): FileProcessingError => {
+  const categorizeXmlError = (error: unknown, _filename: string): FileProcessingError => {
     const errorMsg = error instanceof Error ? error.message : String(error);
 
     // File read errors

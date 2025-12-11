@@ -4,7 +4,7 @@
  * Type definitions for enhanced error handling during multi-file uploads
  */
 
-import { ParsedData } from './types';
+import { ParsedData } from '../types';
 
 /**
  * Error types with different verbosity levels
